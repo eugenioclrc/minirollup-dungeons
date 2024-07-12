@@ -4,7 +4,7 @@ import { MerkleTree } from "merkletreejs";
 
 export type GameState = {
     address: string;  // address of the player
-    gamestate: string;  // state of game will be a base64 encoded string for now
+    gamestate: BytesLike;  // state of game will be a base64 encoded string for now
     timestamp: number;  // timestamp of the game state
 }[];
 
@@ -26,7 +26,7 @@ export class BetterMerkleTree {
   }
 
   createTree(game: GameState) {
-    console.log("game", game)
+    game = game || [];
     const hashedLeavesGame = game.map((leaf) => {
       return solidityPackedKeccak256(
         ["address", "bytes", "uint256"],

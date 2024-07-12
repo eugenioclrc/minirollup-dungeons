@@ -25,6 +25,7 @@ export const transitions: Transitions<CounterState> = {
 
 import { Transitions, STF } from "@stackr/sdk/machine";
 import { GAME, BetterMerkleTree as StateWrapper } from "./state";
+import { BytesLike, ethers } from "ethers";
 
 // --------- Utilities ---------
 const findIndexOfAccountGame = (state: StateWrapper, address: string) => {
@@ -37,19 +38,20 @@ type CreateInput = {
 
 type GameInput = {
   address: string;
-  gamestate: string;
+  gamestate: BytesLike;
 };
 
 // --------- State Transition Handlers ---------
 const create: STF<GAME, CreateInput> = {
   handler: ({ inputs, state }) => {
     const { address } = inputs;
+    state.gameleaves = state.gameleaves || [];
     if (state.gameleaves.find((leaf) => leaf.address === address)) {
       throw new Error("Account already exists");
     }
     state.gameleaves.push({
       address,
-      gamestate: "",
+      gamestate: ethers.toUtf8Bytes(""),
       timestamp: Date.now(), // timestamp in milliseconds
     });
     return state;
