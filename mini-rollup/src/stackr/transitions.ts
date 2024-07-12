@@ -38,7 +38,7 @@ type CreateInput = {
 
 type GameInput = {
   address: string;
-  gamestate: BytesLike;
+  gamestate: string;
 };
 
 // --------- State Transition Handlers ---------
@@ -51,7 +51,7 @@ const create: STF<GAME, CreateInput> = {
     }
     state.gameleaves.push({
       address,
-      gamestate: ethers.toUtf8Bytes(""),
+      gamestate: "",
       timestamp: Date.now(), // timestamp in milliseconds
     });
     return state;
@@ -63,7 +63,7 @@ const updateGamestate: STF<GAME, GameInput> = {
     const { address, gamestate } = inputs;
     const index = findIndexOfAccountGame(state, address);
    
-    state.gameleaves[index].gamestate += gamestate;
+    state.gameleaves[index].gamestate = gamestate;
     return state;
   },
 };

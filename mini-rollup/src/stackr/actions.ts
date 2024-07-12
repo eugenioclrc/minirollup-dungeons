@@ -9,6 +9,7 @@ import { ActionSchema, SolidityType } from "@stackr/sdk";
 
 export const createAccountSchema = new ActionSchema("createAccount", {
   address: SolidityType.ADDRESS,
+  timestamp: SolidityType.UINT,  // timestamp
 });
 
 export const gameSchema = new ActionSchema("game", {
