@@ -87,14 +87,17 @@ app.get("/getEIP712Types/:action", (_req: Request, res: Response) => {
   const { action }: { action: ActionName } = _req.params;
   const eip712Types = schemas[action].EIP712TypedData.types;
   return res.send({ eip712Types });
-});
+});http://localhost:3004/game/
 
 app.get("/game/:wallet", (_req: Request, res: Response) => {
   const { wallet }: { wallet: string } = _req.params;
   console.log(gameMachine?.state)
-  //const game = gameMachine?.state.gameleaves.find((leaf) => leaf.address === wallet);
-  return res.send({ state: gameMachine?.state });
+
+  const game = gameMachine?.state.game && gameMachine?.state.game.find((w) => w.address === wallet);
+  return res.send({ state: gameMachine?.state, game });
 });
+
+
 
 //app.get("/", (_req: Request, res: Response) => {
 //  return res.send({ state: gameMachine?.state });

@@ -73,29 +73,3 @@ export class GAME extends State<GameVariable, BetterMerkleTree> {
     );
   }
 }
-/*
-
-import { State, StateMachine } from "@stackr/sdk/machine";
-import { solidityPackedKeccak256 } from "ethers";
-
-import * as genesisState from "../../genesis-state.json";
-import { transitions } from "./transitions";
-
-export type GameStateType = {
-    address: string;  // address of the player
-    gamestate: string;  // state of game will be a base64 encoded string for now
-}
-
-export type GAMEMANAGERStateType = {
-    games: GameStateType[];
-  };
-  
-  export class GameManagerState extends State<GAMEMANAGERStateType> {
- 
-    constructor(games: UTXOStateType) {
-
-        this.merkleTreeUTXO = this.createTree(leaves.utxos);
-        this.games = games;
-    }
-  }
-    */

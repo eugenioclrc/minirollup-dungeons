@@ -14,12 +14,12 @@ export const createAccountSchema = new ActionSchema("createAccount", {
 
 export const gameSchema = new ActionSchema("game", {
   address: SolidityType.ADDRESS,
-  gamestate: SolidityType.BYTES,  // state of game will be a base64 encoded string for now
+  gamestate: SolidityType.STRING,  // state of game will be a base64 encoded string for now
   timestamp: SolidityType.UINT,  // timestamp of the game state
 });
 
 
 export const schemas = {
   create: createAccountSchema,
-  updateScore: gameSchema
+  updateGamestate: gameSchema
 };
